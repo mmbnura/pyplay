@@ -45,3 +45,5 @@ The application calculates monthly EMI and displays a **detailed month-wise amor
 
 ## 📂 Project Structure
 
+- `emi calculator.py` - Loan EMI calculator desktop app.
+- `simple_spreadsheet.py` - Simple spreadsheet-style grid with basic formulas.
