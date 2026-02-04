@@ -78,7 +78,7 @@ class SpreadsheetApp(tk.Tk):
                 entry.grid(row=row + 1, column=col + 1, sticky="nsew", padx=2, pady=2)
                 entry.bind("<FocusIn>", lambda event, r=row, c=col: self.on_focus_in(r, c))
                 entry.bind("<FocusOut>", lambda event, r=row, c=col: self.on_focus_out(r, c))
-                entry.bind("<Return>", lambda event, r=row, c=col: self.on_focus_out(r, c))
+                entry.bind("<Return>", lambda event, r=row, c=col: self.on_return(event, r, c))
                 self.entries[row][col] = entry
 
     def clear_all(self):
@@ -97,6 +97,12 @@ class SpreadsheetApp(tk.Tk):
         raw = self.cell_vars[row][col].get().strip()
         self.cell_inputs[row][col] = raw
         self.recalculate()
+
+    def on_return(self, event, row, col):
+        self.on_focus_out(row, col)
+        next_row = min(row + 1, ROWS - 1)
+        self.entries[next_row][col].focus_set()
+        return "break"
 
     def recalculate(self):
         memo = {}
